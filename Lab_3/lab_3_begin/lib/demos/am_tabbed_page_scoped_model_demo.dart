@@ -1,36 +1,50 @@
 import 'package:scoped_model/scoped_model.dart';
 import 'package:flutter/material.dart';
+import 'package:coffee_store_app/model/DrinkType.dart';
 
-class Number {
-  final String title;
-  final String image;
-  Number(this.title, this.image);
-}
-
-List<Number> nums = <Number>[
-  Number('1', 'assets/img/1-1.jpg'),
-  Number('2', 'assets/img/2-1.jpg'),
+List<DrinkType> mainTypes = <DrinkType>[
+  DrinkType('Coffee', 'assets/img/black-coffee.jpeg', 4.12),
+  DrinkType('Tea', 'assets/img/black-tea.jpeg', 4.12),
+  DrinkType('Juice', 'assets/img/lemon.jpeg', 4.12),
+  DrinkType('Smoothie', 'assets/img/apple-smoothie.jpeg', 4.12),
 ];
 
-List<Number> ones = <Number>[
-  Number('1-2', 'assets/img/1-2.jpg'),
-  Number('1-3', 'assets/img/1-3.jpg'),
-  Number('1-4', 'assets/img/1-4.jpg'),
-  Number('1-5', 'assets/img/1-5.jpg'),
+List<DrinkType> coffeeTypes = <DrinkType>[
+  DrinkType('Black Coffee', 'assets/img/black-coffee.jpeg', 4.12),
+  DrinkType('Cappuccino', 'assets/img/cappuccino.jpeg', 4.12),
+  DrinkType('Espresso', 'assets/img/espresso.jpeg', 4.12),
+  DrinkType('Latte', 'assets/img/latte.jpeg', 4.12),
 ];
 
-List<Number> twos = <Number>[
-  Number('2-2', 'assets/img/2-2.jpg'),
-  Number('2-3', 'assets/img/2-3.jpg'),
-  Number('2-4', 'assets/img/2-4.jpg'),
+List<DrinkType> teaTypes = <DrinkType>[
+  DrinkType('Black Tea', 'assets/img/black-tea.jpeg', 4.12),
+  DrinkType('Brown Tea', 'assets/img/brown-tea.jpeg', 4.12),
+  DrinkType('English Tea', 'assets/img/english-tea.jpeg', 4.12),
+  DrinkType('Herbal Tea', 'assets/img/herbal-tea.jpeg', 4.12),
+  DrinkType('Mint Tea', 'assets/img/mint-tea.jpeg', 4.12),
+];
+
+List<DrinkType> juiceTypes = <DrinkType>[
+  DrinkType('Lemon Juice', 'assets/img/lemon.jpeg', 4.12),
+  DrinkType('Lime Juice', 'assets/img/lime.jpeg', 4.12),
+  DrinkType('Pink Grape Juice', 'assets/img/pink-grape.jpeg', 4.12),
+  DrinkType('Plum Juice', 'assets/img/plum.jpeg', 4.12),
+  DrinkType('Tomato Juice', 'assets/img/tomato.jpeg', 4.12),
+];
+
+List<DrinkType> smoothieTypes = <DrinkType>[
+  DrinkType('Apple Smoothie', 'assets/img/apple-smoothie.jpeg', 4.12),
+  DrinkType('Blackberry Smoothie', 'assets/img/black-smoothie.jpeg', 4.12),
+  DrinkType('Kiwi Fruit Smoothie', 'assets/img/kiwi-smoothie.jpeg', 4.12),
+  DrinkType('Raspberry Smoothie ', 'assets/img/rasberry-smoothie.jpeg', 4.12),
 ];
 
 class MyModel extends Model {
-  List<Number> _chosenNumber = ones;
+  List<DrinkType> _chosenNumber = coffeeTypes;
 
-  List<Number> get chosenNumber => _chosenNumber;
+  List<DrinkType> get chosenNumber => _chosenNumber;
 
-  void updateNumbersList(List<Number> type) {
+  void updateNumbersList(List<DrinkType> type) {
     _chosenNumber = type;
     notifyListeners();
   }
@@ -40,11 +54,11 @@ class MyTabbedScopedModelApp1 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Lab3 Demo',
+      title: 'Lab3',
       theme: ThemeData(
-        primarySwatch: Colors.lightGreen,
+        primarySwatch: Colors.lightBlue,
       ),
-      home: HomePage(title: 'Lab3 Tabbed and Scoped Model Demo'),
+      home: HomePage(title: ''),
     );
   }
 }
@@ -59,9 +73,9 @@ class HomePage extends StatelessWidget {
     return ScopedModel<MyModel>(
       model: MyModel(),
       child: Scaffold(
-        backgroundColor: Colors.lightGreen,
+        backgroundColor: Colors.lightBlue,
         appBar: AppBar(
-          title: Text(title),
+          title: Text('Store Home', style: TextStyle(color: Colors.white)),
         ),
         body: Column(
           children: <Widget>[
@@ -86,7 +100,7 @@ class _NumbersCarouselState extends State<NumbersCarousel>
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(length: nums.length, vsync: this);
+    _tabController = TabController(length: mainTypes.length, vsync: this);
   }
 
   @override
@@ -98,10 +112,10 @@ class _NumbersCarouselState extends State<NumbersCarousel>
   void _changeImage({int delta}) {
     var newTabIndex = _tabController.index + delta;
     print('begin $newTabIndex');
-    if (newTabIndex >= nums.length) {
+    if (newTabIndex >= mainTypes.length) {
       newTabIndex = 0;
     } else if (newTabIndex < 0) {
-      newTabIndex = nums.length - 1;
+      newTabIndex = mainTypes.length - 1;
     }
     print('end $newTabIndex');
     _tabController.animateTo(
@@ -128,16 +142,22 @@ class _NumbersCarouselState extends State<NumbersCarousel>
               builder: (context, _, model) {
                 return TabBarView(
                   controller: _tabController,
-                  children: nums.map((numberType) {
+                  children: mainTypes.map((numberType) {
                     return GestureDetector(
                       onTap: () {
                         var type;
                         switch (numberType.title) {
-                          case '1':
-                            type = ones;
+                          case 'Coffee':
+                            type = coffeeTypes;
                             break;
-                          case '2':
-                            type = twos;
+                          case 'Tea':
+                            type = teaTypes;
+                            break;
+                          case 'Juice':
+                            type = juiceTypes;
+                            break;
+                          case 'Smoothie':
+                            type = smoothieTypes;
                             break;
                           default:
                             throw '${numberType.title} type not recognized';
@@ -168,7 +188,7 @@ class _NumbersCarouselState extends State<NumbersCarousel>
               child: IconButton(
                 icon: Icon(
                   Icons.arrow_back,
-                  color: Colors.lightGreen,
+                  color: Colors.white,
                   size: 36,
                 ),
                 onPressed: () {
@@ -181,7 +201,7 @@ class _NumbersCarouselState extends State<NumbersCarousel>
               child: IconButton(
                 icon: Icon(
                   Icons.arrow_forward,
-                  color: Colors.lightGreen,
+                  color: Colors.white,
                   size: 36,
                 ),
                 onPressed: () {
@@ -197,7 +217,7 @@ class _NumbersCarouselState extends State<NumbersCarousel>
 }
 
 class NumbersCard extends StatelessWidget {
-  final Number instantsNumber;
+  final DrinkType instantsNumber;
 
   const NumbersCard({Key key, this.instantsNumber}) : super(key: key);
 
@@ -213,6 +233,10 @@ class NumbersCard extends StatelessWidget {
               width: double.infinity,
               fit: BoxFit.cover,
             ),
+            Container( 
+                alignment: Alignment.topCenter,
+                child: Text(instantsNumber.title, style: TextStyle(color: Colors.white, fontSize: 20.0, fontWeight: FontWeight.bold), ),
+            )
           ],
         ),
       ),

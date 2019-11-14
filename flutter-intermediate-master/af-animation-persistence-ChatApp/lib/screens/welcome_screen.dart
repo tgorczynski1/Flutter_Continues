@@ -10,6 +10,8 @@ class WelcomeScreen extends StatefulWidget {
 }
 
 class _WelcomeScreenState extends State<WelcomeScreen>
+// animation needs the controller, animate and the value
+// allows multiple classes to extend WelcomeScreenState 
     with SingleTickerProviderStateMixin {
   AnimationController controller;
   Animation animation1;
@@ -25,6 +27,7 @@ class _WelcomeScreenState extends State<WelcomeScreen>
     animation1 = CurvedAnimation(parent: controller, curve: Curves.decelerate);
     animation2 = ColorTween(begin: Colors.purple, end: Colors.lightGreen)
         .animate(controller);
+        // this forwards the animation so it can be continuous
     controller.forward();
     animation1.addStatusListener((status) {
       print(status);
@@ -32,6 +35,7 @@ class _WelcomeScreenState extends State<WelcomeScreen>
         controller.reverse(from: 1.0);
       } else if (status == AnimationStatus.dismissed) {
         controller.forward();
+        //reverses the value when it hits a specified amount
       }
     });
     controller.addListener(() {
@@ -91,7 +95,7 @@ class _WelcomeScreenState extends State<WelcomeScreen>
                     Navigator.pushNamed(context, LoginScreen.id);
                   },
                   minWidth: 200.0,
-                  height: 42.0,
+                  height: animation1.value * 100,
                   child: Text(
                     'Log In',
                   ),

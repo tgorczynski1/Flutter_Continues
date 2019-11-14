@@ -26,6 +26,7 @@ class Screen0 extends StatelessWidget {
               color: Colors.blue,
               child: Text('Go To Screen 2'),
               onPressed: () {
+                //this will send you to a different screen
                 Navigator.pushNamed(
                   context,
                   '/second',

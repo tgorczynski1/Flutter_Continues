@@ -15,8 +15,11 @@ class FlashChat extends StatelessWidget {
           body1: TextStyle(color: Colors.black54),
         ),
       ),
+      // another way to do navigation
       initialRoute: WelcomeScreen.id,
       routes: {
+        //key value pair 
+        //   KEY     .Value
         WelcomeScreen.id: (context) {
           return WelcomeScreen();
         },

@@ -46,6 +46,7 @@ class _CityScreenState extends State<CityScreen> {
               ),
               FlatButton(
                 onPressed: () {
+                  //is related to navigator.push
                   Navigator.pop(context, cityName);
                 },
                 child: Text(

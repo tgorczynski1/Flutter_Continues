@@ -26,7 +26,7 @@ class _LocationScreenState extends State<LocationScreen> {
     print(widget.locationWeather);
     updateUI(widget.locationWeather);
   }
-
+  // with and updateUI, run the code in a setstate()
   void updateUI(dynamic weatherData) {
     setState(() {
       if (weatherData == null) {
@@ -85,6 +85,7 @@ class _LocationScreenState extends State<LocationScreen> {
                   ),
                   FlatButton(
                     onPressed: () async {
+                      // this method return the city screen, use the navigator.pop to transfer data from one screen to another
                       var typedName = await Navigator.push(
                         context,
                         MaterialPageRoute(

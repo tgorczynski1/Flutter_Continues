@@ -27,8 +27,8 @@ class _StockListState extends State<StockList> {
           //TODO:  use title, subtitle, and trailing to display the stock symbol
           // companyName and latestPrice
           title: Text('Symbol: ${stocks[index].symbol}'),
-          subtitle: Text('Name ${stocks[index].name}'),
-          trailing: Text('Price ${stocks[index].price}'),          
+          subtitle: Text('Name: ${stocks[index].name}'),
+          trailing: Text('Price: ${stocks[index].price} USD'),          
         );
       },
     );

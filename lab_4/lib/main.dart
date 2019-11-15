@@ -62,8 +62,8 @@ class _MyHomePageState extends State<MyHomePage> {
                     var stockData = await _stockService.getQuote(_stockSymbol);
 
                     var symbol = '';
-                    //var name = '';
-                    //var price = 0.0;
+
+                    print(stockData);
                     
                     if (stockData == null) {
                       symbol =
@@ -71,14 +71,12 @@ class _MyHomePageState extends State<MyHomePage> {
                     } else 
                     {                       
                       symbol = stockData['symbol'];
-                      var name = stockData['name'];
-                      var price = stockData['price'];
+                      var name = stockData['companyName'];
+                      var price = stockData['latestPrice'];
                       Stock stock = Stock(symbol, name, price);
 
                       _stockList.add(stock);
-
-                      print(name);
-                      print(price);
+                    
                     }
                     setState(() {
                       print(symbol);
